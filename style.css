@@ -65,7 +65,7 @@ main {
   justify-content: center;
 }
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList {
-  width: 86%;
+  width: 89%;
   padding: 12px 0;
 }
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem {
@@ -112,17 +112,6 @@ main {
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem:hover .numberAnswer p {
   color: white;
 }
-.questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem:active .numberAnswer {
-  background: tomato;
-  cursor: pointer;
-}
-.isSelect {
-  background: tomato;
-  color: white;
-}
-.questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem:hover .numberAnswer p {
-  color: white;
-}
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem:hover .btnRemoveAndUpdate {
   display: flex;
 }
@@ -131,19 +120,6 @@ main {
   display: flex;
   align-items: center;
   width: 69%;
-}
-.questionListContainer .questionList .questionContainer .question  .isCorrectOrNot {
-
-  width: 250px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 600;
-  color: #0a940a;
-}
-.questionListContainer .questionList .questionContainer .question  .isCorrectOrNot .respFalse {
-  color: red;
 }
 .questionListContainer .questionList .questionContainer .question .containerBtn .groupBtns {
   WIDTH: 124PX;
