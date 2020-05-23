@@ -49,7 +49,7 @@ export default (props) =>  {
                     e.preventDefault();
                     setShowModal(true);
                 }}>Criar Questão </button>
-        { showModal && <Modal closeButton={closeButton} addQuestion={updateQuestion}question={{description:''}}  />   }
+        { showModal && <Modal closeModal={closeButton} addQuestion={updateQuestion}question={{description:''}}  />   }
                 {questions && questions.map(element=> {
                     return (<Question updateQt={updateQuestion} removeQuestion={popQuestion} question={element} />)
                 })}

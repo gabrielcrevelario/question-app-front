@@ -10,7 +10,15 @@ main {
   justify-content: center;
   align-items: center;
 }
-
+button {
+  width: 100px;
+    height: 32px;
+    background: tomato;
+    color: white;
+    border: none;
+    font-weight: 600;
+    text-transform: capitalize;
+}
 .questionListContainer {
   width: 80%;
   padding: 100px 0 0;
@@ -104,6 +112,7 @@ main {
   border: none;
   background: none;
   color: tomato;
+  width: 39px;
 }
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem:hover .numberAnswer {
   background: tomato;
@@ -170,3 +179,70 @@ main {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/*# sourceMappingURL=style.css.map */
+main .questionListContainer .containerModal {
+
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  background: rgba(0,0,0,0.8);
+  height: 100%;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*# sourceMappingURL=style.css.map */
+main .questionListContainer .containerModal .modal {
+  width: 600px;
+  height: 300px;
+  background: white;
+}
+main .questionListContainer .containerModal  .modalHeader {
+
+  display: flex;
+  justify-content: flex-end;
+  /* justify-content: center; */
+}
+/* align-items: center; */
+main .questionListContainer .containerModal  .modalHeader {
+
+  width: 32px;
+  height: 34px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+}
+main .questionListContainer .containerModal .modalBody {
+  height: 206px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+main .questionListContainer .containerModal input {
+
+  width: 90%;
+  height: 35px;
+  border-radius: 5px;
+  border: #c5c5c5 solid 1px;
+}
+main .questionListContainer .containerModal .modalFooter {
+
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  align-items: center;
+}
+main .questionListContainer .containerModal .modalFooter  button {
+
+  width: 100px;
+  height: 32px;
+  background: tomato;
+  color: white;
+  border: none;
+  font-weight: 600;
+  text-transform: capitalize;
+  
+}

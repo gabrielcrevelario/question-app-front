@@ -99,8 +99,10 @@ const Modal = props => {
                         </div>
                         <div className="modalBody">
                             <input  value={valueAnswer} onChange={e => changeAnswerValue(e)} type="text" name="" id=""/>
-                            <label for="isTrue"> É a resposta certa ?</label>
-                            <input type="checkbox" name="isTrue" value="Boat" onClick={e => onChange(e)} checked={answer.questionTrue} defaultChecked={answer.questionTrue} />          
+                            <div className="checkBoxContainer">
+                                <label for="isTrue"> É a resposta certa ?</label>
+                                <input type="checkbox" name="isTrue" value="Boat" onClick={e => onChange(e)} checked={answer.questionTrue} defaultChecked={answer.questionTrue} />          
+                            </div>
                         </div>
                         <div className="modalFooter">
                             <button onClick={e => save(e)} >Salvar</button>
