@@ -65,7 +65,7 @@ main {
   justify-content: center;
 }
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList {
-  width: 86%;
+  width: 90%;
   padding: 12px 0;
 }
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem {
@@ -119,6 +119,9 @@ main {
 .isSelect {
   background: tomato;
   color: white;
+}
+.isSelect p {
+  color: white!important;
 }
 .questionListContainer .questionList .questionContainer .question .questionBody .answerList .answerItem:hover .numberAnswer p {
   color: white;
