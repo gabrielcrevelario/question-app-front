@@ -4,13 +4,15 @@ import {ANSWER_REMOVE_BY_ID} from './queries'
 import { useMutation } from "@apollo/react-hooks";
 export default props => {
     
-    const {answer, onClick, isClicked, removeElement, letter} = props
+    const {answer, onClick, isClicked, removeElement, letter, addAnswer} = props
     const [showModal, setShowModal] = useState(false)
 
     const [answerRemoveById, { data }] = useMutation(ANSWER_REMOVE_BY_ID);
     
     function remove(e) {
+        debugger
         e.preventDefault()
+        e.stopPropagation();
         removeElement(e,answer._id)
         answerRemoveById({variables:{_id:answer._id}})
     }
@@ -30,10 +32,19 @@ export default props => {
     function closeModal() {
         setShowModal(false)
     }
+    function setAnswer(newAnswer, isUpdate) {
+        debugger
+        if(isUpdate) {
+            answer.descriptionAnswers = newAnswer.descriptionAnswers
+            answer.questionTrue = newAnswer.questionTrue
+        } else {
+            addAnswer({_id:newAnswer._id, descriptionAnswers:newAnswer.descriptionAnswers, questionTrue:newAnswer.questionTrue})
+        }
+    }
     return (
         <div className="answersContainer">
         <div className="answerItem">
-            { showModal && <Modal answer={answer} closeModalAnswer={closeModal} closeButton={closeModal} />   }
+            { showModal && <Modal answer={answer} addAnswer={setAnswer} close={closeModal} />   }
             <div className="numberAnswerContainer">
     <div onClick={e => selectButton(e, answer)} className={`numberAnswer ${isClicked ? "isSelect":""}`} > <p>{letter}</p></div>
             </div>

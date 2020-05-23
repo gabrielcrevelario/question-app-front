@@ -6,10 +6,10 @@ import { QUESTION_REMOVE_BY_ID } from './queries'
 export default props => {
     let { description, answers } = props.question
 
-    let {removeQuestion, updateQt} = props
+    let {removeQuestion, updateQt, closeModal, numberQuestion, updateAnswer} = props
     const [isCorrect, setIsCorrect] = useState(false)
     const [showButton, setshowButton] = useState(false)
-    const [showModal, setShowModal] = useState(false)
+    const [openModal, setShowModal] = useState(false)
     const [isCreatedAnswer, setIsCreatedAnswer] = useState(false)
     const [respClicked, setRespClicked] = useState({})
     const [QuestionRemoveById, {data}] = useMutation(QUESTION_REMOVE_BY_ID);
@@ -29,20 +29,17 @@ export default props => {
     }
     
     function removeAnswerOfList(e, id) {
-        e.stopPropagation();
-        debugger
         props.question.answers = answers.filter(x => x._id !== id)
-        answers = answers.filter(x => x._id !== id)
-        updateQuestion(props.question)
+        updateAnswer(props.question)
     }
     function updateQuestion(e, question) {
         e.preventDefault();
         updateQt(e, question)
     }
     function addAnswerOfList(answer) {
-        debugger
         props.question.answers.push(answer)
         setRespClicked({})
+        setShowModal(false)
     }
     
     function createAnswer(e) {
@@ -56,23 +53,21 @@ export default props => {
         setIsCreatedAnswer(false)
         setRespClicked({})
     }
-    function closeModal() {
-        setShowModal(false)
-    }
-
+   
     function addQuestion(description) {
         props.question.description = description
     }
 
     return (<div className="questionContainer">
         <div className="question">
-        { showModal && <Modal closeModal={closeModal} addAnswer={addAnswerOfList}
+        { openModal && <Modal close showModal={setShowModal} addAnswer={addAnswerOfList}
                 addQuestion={addQuestion}
+                closeQuestionAfterUpdate={closeModal}
                 question={!isCreatedAnswer && props.question}
                 answer={isCreatedAnswer && {_id:'', questionId:props.question._id,descriptionAnswers:''}} closeButton={closeModal} />   }
             <div className="questionHeader">
                 <div className="questionContainerNumber">
-                    <p>1</p>
+                <p>{numberQuestion}</p>
                 </div>
                 <div className="questionTitle">
                     <h3> {description} </h3>
@@ -84,11 +79,12 @@ export default props => {
                     <div className="questionItemContainer">
                         <div className="item">
                             <div className="answersList">
-                                {answers.map((answer, index) => {
+                                {answers && answers.map((answer, index) => {
+                                    debugger
                                     if(respClicked._id === answer["_id"]) {
-                                        return <Answer removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index)} answer={answer} isClicked={true} />
+                                        return <Answer key={answer._id} removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index)} answer={answer} isClicked={true} />
                                     } else {
-                                        return <Answer  removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index)}  answer={answer} isClicked={false} />
+                                        return <Answer  key={answer._id} removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index)}  answer={answer} isClicked={false} />
                                     }
                                 })}
 

@@ -30,10 +30,20 @@ export default (props) =>  {
     })
 
    function popQuestion(id) {
-    setQuestions(questions.filter(x => x._id === id))
+    setQuestions(questions.filter(x => x._id !== id))
     }
-    function closeButton() {
+    function closeButton(question, isUpdate) {
+        debugger
         setShowModal(false)
+        if(isUpdate) {
+           const index = questions.findIndex(x => x._id === question._id)
+           let oldQuestion = questions.filter(x => x._id === question._id)[0];
+           oldQuestion.description = question.description
+           questions.splice(index, 1,oldQuestion,{...oldQuestion});
+           
+        } else {
+            if(question) setQuestions(questions.concat(question))
+        } 
     }
     function updateQuestion(question) {
       let index = questions.findIndex(x => x._id === question._id)
@@ -49,9 +59,9 @@ export default (props) =>  {
                     e.preventDefault();
                     setShowModal(true);
                 }}>Criar Questão </button>
-        { showModal && <Modal closeModal={closeButton} addQuestion={updateQuestion}question={{description:''}}  />   }
-                {questions && questions.map(element=> {
-                    return (<Question updateQt={updateQuestion} removeQuestion={popQuestion} question={element} />)
+                    { showModal && <Modal showModal={setShowModal} closeQuestion={closeButton} addQuestion={updateQuestion}question={{description:''}}  />   }
+                     {questions && questions.map((element, index) => {
+                    return (<Question updateAnswer={closeButton} numberQuestion={index + 1} key={element._id} closeModal={closeButton} updateQt={updateQuestion} removeQuestion={popQuestion} question={element} />)
                 })}
 
             </div>

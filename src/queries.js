@@ -19,6 +19,7 @@ export const ANSWER_UPDATE_BY_ID = gql` mutation AnswerUpdateById( $_id:MongoID!
       record {
         _id
         descriptionAnswers
+        questionTrue
      }
    }
  
@@ -30,6 +31,7 @@ export const ANSWER_CREATE_ONE = gql` mutation AnswerCreateOne( $questionId:Mong
       record {
         _id
         descriptionAnswers
+        questionTrue
      }
    }
  
@@ -65,6 +67,7 @@ export const QUESTION_CREATE_ONE = gql` mutation QuestionCreateOne(  $descriptio
     QuestionCreateOne( record:{  description:$description } ) {
       record {
         _id
+        description
     
      }
    }
