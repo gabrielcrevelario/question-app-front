@@ -3,7 +3,7 @@ import {  useMutation } from "@apollo/react-hooks";
 import { ANSWER_MANY, QUESTION_MANY } from './queries';
 import {ANSWER_UPDATE_BY_ID, QUESTION_UPDATE_BY_ID, ANSWER_CREATE_ONE, QUESTION_CREATE_ONE} from './queries'
 const Modal = props => {
-    const {answer, question, closeButton, addAnswer, addQuestion ,showModal, closeQuestionAfterUpdate, close} = props;
+    const {answer, question, closeButton, addAnswer, addQuestion ,showModal, closeQuestionAfterUpdate, close, titleModal} = props;
     const [valueAnswer, setValueAnswer] = useState( answer && answer.descriptionAnswers)
     const [valueQuestion, setValueQuestion] = useState(question && question.description)
     const [checkAnswer, setCheckAnswer] = useState(answer ? answer.questionTrue: false)
@@ -64,13 +64,11 @@ const Modal = props => {
  function saveQuestion(e) {
      e.preventDefault();
      if(question._id && question._id !== '') {
-        debugger
         const questionUpdate =  { _id:question._id, description:question.description }
         QuestionUpdateById({  variables: {...questionUpdate}});
         closeQuestionAfterUpdate(questionUpdate, true)
         showModal(false)
     } else {
-         debugger
        const newQuestion = { description:valueQuestion};
        QuestionCreateOne({variables:newQuestion})
      }
@@ -86,11 +84,11 @@ const Modal = props => {
                     <div className="modal">
                         <div className="modalHeader">
                             <div onClick={e => {
-                                e.preventDefault();
                                 showModal(false)
                             }} className="close">X</div>
                         </div>
                         <div className="modalBody">
+                            <h2>{titleModal}</h2>
                             <input value={valueQuestion} onChange={e => changeQuestionValue(e)} type="text" name="" id=""/>
                         </div>
                         <div className="modalFooter">
@@ -108,6 +106,7 @@ const Modal = props => {
                             <div onClick={ (e) => {close()}}  className="close">X</div>
                         </div>
                         <div className="modalBody">
+                           <h2>{titleModal}</h2>
                             <input  value={valueAnswer} onChange={e => changeAnswerValue(e)} type="text" name="" id=""/>
                             <div className="checkBoxContainer">
                                 <label> É a resposta certa ?</label>

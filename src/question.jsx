@@ -62,8 +62,10 @@ export default props => {
         <div className="question">
         { openModal && <Modal close showModal={setShowModal} addAnswer={addAnswerOfList}
                 addQuestion={addQuestion}
+                close={setShowModal}
                 closeQuestionAfterUpdate={closeModal}
                 question={!isCreatedAnswer && props.question}
+                titleModal={isCreatedAnswer ? 'Deseja criar uma nova alternativa ?': 'Deseja atualizar a descrição da questão ?'} 
                 answer={isCreatedAnswer && {_id:'', questionId:props.question._id,descriptionAnswers:''}} closeButton={closeModal} />   }
             <div className="questionHeader">
                 <div className="questionContainerNumber">
@@ -75,16 +77,16 @@ export default props => {
 
             </div>
             <div className="questionBody">
-                <div className="answerList">
+                <div onClick={e => setRespClicked({})} className="answerList">
                     <div className="questionItemContainer">
                         <div className="item">
                             <div className="answersList">
                                 {answers && answers.map((answer, index) => {
                                     debugger
                                     if(respClicked._id === answer["_id"]) {
-                                        return <Answer key={answer._id} removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index)} answer={answer} isClicked={true} />
+                                        return <Answer key={answer._id} removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index).toLocaleUpperCase()} answer={answer} isClicked={true} />
                                     } else {
-                                        return <Answer  key={answer._id} removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index)}  answer={answer} isClicked={false} />
+                                        return <Answer  key={answer._id} removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index).toLocaleUpperCase()}  answer={answer} isClicked={false} />
                                     }
                                 })}
 
@@ -95,7 +97,9 @@ export default props => {
                 </div>
             </div>
             <div className="containerBtn">
-                <button onClick={showResp}>responder</button>
+              {Object.keys(respClicked).length > 0 ? <button  onClick={showResp}>responder</button>:
+              <button className="desabledButton" onClick={e => e.preventDefault()}>responder</button>
+              }
                 {
                   showButton &&
                  <div className="isCorrectOrNot">
