@@ -82,7 +82,6 @@ export default props => {
                         <div className="item">
                             <div className="answersList">
                                 {answers && answers.map((answer, index) => {
-                                    debugger
                                     if(respClicked._id === answer["_id"]) {
                                         return <Answer key={answer._id} removeElement={removeAnswerOfList} onClick={setResponse} letter={String.fromCharCode(97 + index).toLocaleUpperCase()} answer={answer} isClicked={true} />
                                     } else {

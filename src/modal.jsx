@@ -11,7 +11,6 @@ const Modal = props => {
     const [AnswerCreateOne] = useMutation(ANSWER_CREATE_ONE,
     {
       update(cache, { data: { AnswerCreateOne } }) {
-          debugger
           addAnswer(AnswerCreateOne.record, false)
         const {AnswerMany } = cache.readQuery({ query: ANSWER_MANY });
         cache.writeQuery({
@@ -56,7 +55,6 @@ const Modal = props => {
         } else {
             let newAnswer = {questionId:answer.questionId, descriptionAnswers:valueAnswer, questionTrue:checkAnswer ? checkAnswer: false};
              AnswerCreateOne({variables:newAnswer})
-            debugger
             console.log(dataUpdate)
        
       }
@@ -74,7 +72,6 @@ const Modal = props => {
      }
 }
         function onChange(e) {
-            debugger
             setCheckAnswer(e.target.checked)
         }
     if(question) {
