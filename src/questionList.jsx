@@ -9,14 +9,14 @@ export default (props) => {
     const [isLoading, setLoading] = useState(true)
     const [rendered, setRendered] = useState(false)
     const [showModal, setShowModal] = useState(false)
-
+    let questionsList = [];
     const questionMany = useQuery(QUESTION_MANY)
     const answerMany = useQuery(ANSWER_MANY)
     useEffect(() => {
         if (!questionMany.loading && !answerMany.loading && !rendered) {
             setLoading(questionMany.loading)
             if (questionMany.data) {
-                const questionsList = questionMany.data.QuestionMany.map(question => {
+                 questionsList = questionMany.data.QuestionMany.map(question => {
                     question.answers = answerMany.data.AnswerMany.filter(answer => answer.questionId === question['_id'])
                     return question;
                 })
@@ -26,7 +26,7 @@ export default (props) => {
             }
         }
     })
-
+    
     function popQuestion(id) {
         setQuestions(questions.filter(x => x._id !== id))
     }
@@ -53,10 +53,11 @@ export default (props) => {
     return (
         <div className="questionListContainer">
             <div className="questionList">
-                <button onClick={e => {
-                    e.preventDefault();
-                    setShowModal(true);
-                }}>Criar Questão </button>
+                <div className="containerSearchAndCreate">
+                <div className="createQuestion">
+                    <button onClick={e => { e.preventDefault(); setShowModal(true);    }}>Criar Questão </button>
+                </div>
+                </div>
                 {showModal && <Modal titleModal="Deseja criar uma nova questão ?" showModal={setShowModal} closeQuestion={closeButton} addQuestion={updateQuestion} question={{ description: '' }} />}
                 {questions && questions.map((element, index) => {
                     return (<Question updateAnswer={closeButton} numberQuestion={index + 1} key={element._id} closeModal={closeButton} updateQt={updateQuestion} removeQuestion={popQuestion} question={element} />)

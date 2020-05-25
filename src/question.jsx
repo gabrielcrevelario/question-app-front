@@ -104,7 +104,11 @@ export default props => {
                   showButton &&
                  <div className="isCorrectOrNot">
                      {
-                         isCorrect ?  <p>Resposta certa! :)</p> :  <p className="respFalse">Resposta errada! :(</p>
+                         isCorrect ?<> <p>Resposta certa! </p> <span class="material-icons">
+                         check
+                         </span> </>:<>  <p className="respFalse">Resposta errada!</p> <span  class="material-icons respFalse">
+                        clear
+                        </span></>
                      }
                 </div>
                 }
