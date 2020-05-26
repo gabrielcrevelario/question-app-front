@@ -38,9 +38,10 @@ export default (props) => {
             oldQuestion.description = question.description
 
         } else {
-            if (question) setQuestions(questions.concat(question))
+            setQuestions(questions.concat(question))
         }
     }
+ 
     function updateQuestion(question) {
         let index = questions.findIndex(x => x._id === question._id)
         questions[index] = question;
@@ -58,7 +59,7 @@ export default (props) => {
                     <button onClick={e => { e.preventDefault(); setShowModal(true);    }}>Criar Questão </button>
                 </div>
                 </div>
-                {showModal && <Modal titleModal="Deseja criar uma nova questão ?" showModal={setShowModal} closeQuestion={closeButton} addQuestion={updateQuestion} question={{ description: '' }} />}
+                {showModal && <Modal titleModal="Deseja criar uma nova questão ?" showModal={setShowModal} closeButton={closeButton} addQuestion={updateQuestion} question={{ description: '' }} />}
                 {questions && questions.map((element, index) => {
                     return (<Question updateAnswer={closeButton} numberQuestion={index + 1} key={element._id} closeModal={closeButton} updateQt={updateQuestion} removeQuestion={popQuestion} question={element} />)
                 })}

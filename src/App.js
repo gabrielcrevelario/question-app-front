@@ -9,7 +9,11 @@ import QuestionList from './questionList'
 const client = new ApolloClient({
   uri: 'http://localhost:8080/'
 })
-
+const main = React.useRef()
+function scrollFunc(e) {
+  debugger
+  console.log(main.current.scrollTop)
+}
 function App() {
   return (
     //       <Users />
@@ -17,7 +21,7 @@ function App() {
        <header>
           <h1>WebPage para criação de questões e alternativas</h1>
        </header>
-        <main>
+        <main ref={this.main} onScroll={e => scrollFunc(e)}  >
               <QuestionList />
         </main>
      </ApolloProvider>

@@ -23,7 +23,7 @@ const Modal = props => {
         {
           update(cache, { data: { QuestionCreateOne } }) {
               showModal(false)
-              closeQuestionAfterUpdate(QuestionCreateOne.record, false)
+              closeButton(QuestionCreateOne.record, false)
             const {QuestionMany } = cache.readQuery({ query: QUESTION_MANY });
             cache.writeQuery({
               query: ANSWER_MANY,
